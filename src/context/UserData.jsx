@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 const UserContext = createContext();
 
 const UserData = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(undefined);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const UserData = ({ children }) => {
           { withCredentials: true }
         );
         setUser(res.data);
-      } catch {
+      } catch (err) {
         setUser(null);
       } finally {
         setLoading(false);
