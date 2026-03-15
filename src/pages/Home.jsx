@@ -25,7 +25,7 @@ const Home = () => {
   useEffect(() => {
     console.log();
     setLoading(true);
-    fetch("http://localhost:5000/api/property/all")
+    fetch("https://rentopedia-backend.onrender.com/api/property/all")
       .then((res) => res.json())
       .then((data) => {
         setLoading(false)

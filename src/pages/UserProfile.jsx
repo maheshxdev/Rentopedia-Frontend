@@ -13,7 +13,7 @@ const UserProfile = () => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/user/${username}`,
+          `https://rentopedia-backend.onrender.com/api/user/${username}`,
           {
             withCredentials: true, // ✅ boolean, not string
           }

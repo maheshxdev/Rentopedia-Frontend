@@ -16,12 +16,12 @@ const Login = () => {
     try {
       // Login request
       
-      await axios.post("http://localhost:5000/api/auth/login", form, {
+      await axios.post("https://rentopedia-backend.onrender.com/api/auth/login", form, {
         withCredentials: true,
       });
 
       // Fetch user details
-      const res = await axios.get("http://localhost:5000/api/user/me", {
+      const res = await axios.get("https://rentopedia-backend.onrender.com/api/user/me", {
         withCredentials: true,
       });
       setUser(res.data);

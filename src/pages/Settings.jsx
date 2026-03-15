@@ -41,7 +41,7 @@ const Settings = () => {
 
     try {
       const res = await axios.put(
-        "http://localhost:5000/api/user/upload-profile",
+        "https://rentopedia-backend.onrender.com/api/user/upload-profile",
         formData,
         {
           withCredentials: true,
@@ -60,7 +60,7 @@ const Settings = () => {
   const updatePassword = async () => {
     try {
       const res = await axios.put(
-        "http://localhost:5000/api/user/change-password",
+        "https://rentopedia-backend.onrender.com/api/user/change-password",
         { oldPassword, newPassword, confirmPassword },
         { withCredentials: true }
       );
@@ -90,7 +90,7 @@ const Settings = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      await axios.delete("http://localhost:5000/api/user/delete", {
+      await axios.delete("https://rentopedia-backend.onrender.com/api/user/delete", {
         withCredentials: true,
       });
       toast.success("Account deleted!");
@@ -106,7 +106,7 @@ const Settings = () => {
   const logout = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/logout",
+        "https://rentopedia-backend.onrender.com/api/auth/logout",
         {},
         { withCredentials: true }
       );

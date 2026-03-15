@@ -46,7 +46,7 @@ const AddProperty = () => {
     }
 
     const res = await axios.post(
-      "http://localhost:5000/api/property/add",
+      "https://rentopedia-backend.onrender.com/api/property/add",
       formData,
       {
         withCredentials: true,

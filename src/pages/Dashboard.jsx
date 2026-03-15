@@ -14,14 +14,14 @@ const Dashboard = () => {
   const fetchAll = async () => {
     try {
       const userPropsRes = await axios.get(
-        `http://localhost:5000/api/property/owner/${user.username}`,
+        `https://rentopedia-backend.onrender.com/api/property/owner/${user.username}`,
         { withCredentials: true }
       );
       setUserProperties(userPropsRes.data);
 
       const [sentRes, recvRes] = await Promise.all([
-        axios.get(`http://localhost:5000/api/property/rent-requests/sent`, { withCredentials: true }),
-        axios.get(`http://localhost:5000/api/property/rent-requests/received`, { withCredentials: true }),
+        axios.get(`https://rentopedia-backend.onrender.com/api/property/rent-requests/sent`, { withCredentials: true }),
+        axios.get(`https://rentopedia-backend.onrender.com/api/property/rent-requests/received`, { withCredentials: true }),
       ]);
       setSentRequests(sentRes.data);
       setReceivedRequests(recvRes.data);
@@ -47,7 +47,7 @@ const Dashboard = () => {
         toast.info(`New rent request from ${payload.requester}`);
         // refresh received list
         axios
-          .get(`http://localhost:5000/api/property/rent-requests/received`, { withCredentials: true })
+          .get(`https://rentopedia-backend.onrender.com/api/property/rent-requests/received`, { withCredentials: true })
           .then((res) => setReceivedRequests(res.data))
           .catch(() => {});
       }
@@ -58,13 +58,13 @@ const Dashboard = () => {
         toast.info(`Your request was ${payload.status}`);
         // refresh sent list
         axios
-          .get(`http://localhost:5000/api/property/rent-requests/sent`, { withCredentials: true })
+          .get(`https://rentopedia-backend.onrender.com/api/property/rent-requests/sent`, { withCredentials: true })
           .then((res) => setSentRequests(res.data))
           .catch(() => {});
       } else if (user?.username) {
         // owner-side updates as well
         axios
-          .get(`http://localhost:5000/api/property/rent-requests/received`, { withCredentials: true })
+          .get(`https://rentopedia-backend.onrender.com/api/property/rent-requests/received`, { withCredentials: true })
           .then((res) => setReceivedRequests(res.data))
           .catch(() => {});
       }
@@ -189,14 +189,14 @@ const Dashboard = () => {
                     onClick={async () => {
                       try {
                         await axios.post(
-                          `http://localhost:5000/api/property/${req.propertyId}/rent-request/${req.requestId}/cancel`,
+                          `https://rentopedia-backend.onrender.com/api/property/${req.propertyId}/rent-request/${req.requestId}/cancel`,
                           {},
                           { withCredentials: true }
                         );
                         // refresh lists
                         const [sentUpdate, recvUpdate] = await Promise.all([
-                          axios.get(`http://localhost:5000/api/property/rent-requests/sent`, { withCredentials: true }),
-                          axios.get(`http://localhost:5000/api/property/rent-requests/received`, { withCredentials: true }),
+                          axios.get(`https://rentopedia-backend.onrender.com/api/property/rent-requests/sent`, { withCredentials: true }),
+                          axios.get(`https://rentopedia-backend.onrender.com/api/property/rent-requests/received`, { withCredentials: true }),
                         ]);
                         setSentRequests(sentUpdate.data);
                         setReceivedRequests(recvUpdate.data);
@@ -236,11 +236,11 @@ const Dashboard = () => {
                       onClick={async () => {
                         try {
                           await axios.post(
-                            `http://localhost:5000/api/property/${req.propertyId}/rent-request/${req.requestId}/accept`,
+                            `https://rentopedia-backend.onrender.com/api/property/${req.propertyId}/rent-request/${req.requestId}/accept`,
                             {},
                             { withCredentials: true }
                           );
-                          const recvUpdate = await axios.get(`http://localhost:5000/api/property/rent-requests/received`, { withCredentials: true });
+                          const recvUpdate = await axios.get(`https://rentopedia-backend.onrender.com/api/property/rent-requests/received`, { withCredentials: true });
                           setReceivedRequests(recvUpdate.data);
                         } catch (e) {
                           toast.error(e?.response?.data?.message || 'Failed to accept');
@@ -254,11 +254,11 @@ const Dashboard = () => {
                       onClick={async () => {
                         try {
                           await axios.post(
-                            `http://localhost:5000/api/property/${req.propertyId}/rent-request/${req.requestId}/reject`,
+                            `https://rentopedia-backend.onrender.com/api/property/${req.propertyId}/rent-request/${req.requestId}/reject`,
                             {},
                             { withCredentials: true }
                           );
-                          const recvUpdate = await axios.get(`http://localhost:5000/api/property/rent-requests/received`, { withCredentials: true });
+                          const recvUpdate = await axios.get(`https://rentopedia-backend.onrender.com/api/property/rent-requests/received`, { withCredentials: true });
                           setReceivedRequests(recvUpdate.data);
                         } catch (e) {
                           toast.error(e?.response?.data?.message || 'Failed to reject');

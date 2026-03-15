@@ -14,7 +14,7 @@ const UserData = ({ children }) => {
   useEffect(() => {
     const checkUser = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/user/me"); 
+        const res = await axios.get("https://rentopedia-backend.onrender.com/api/user/me"); 
         setUser(res.data);
       } catch (err) {
         setUser(null); // Not logged in or token invalid
