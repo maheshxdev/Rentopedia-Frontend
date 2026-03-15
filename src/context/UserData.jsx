@@ -1,0 +1,37 @@
+// context/UserData.js
+import { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
+
+axios.defaults.withCredentials = true; // send httpOnly cookie
+
+const UserContext = createContext();
+
+const UserData = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/user/me"); 
+        setUser(res.data);
+      } catch (err) {
+        setUser(null); // Not logged in or token invalid
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkUser();
+  }, []);
+
+  return (
+    <UserContext.Provider value={{ user, setUser, loading }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+
+export default UserData;
+export const useUser = () => useContext(UserContext);
