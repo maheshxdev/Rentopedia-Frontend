@@ -8,7 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { setUser } = useUser();
   const [form, setForm] = useState({ username: "", password: "" });
-  const [load,setLoad]=false;
+  const [load, setLoad] = false;
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -19,15 +19,22 @@ const Login = () => {
       setLoad(true);
       // Login request
       NProgress.start();
-      
-      await axios.post("https://rentopedia-backend.onrender.com/api/auth/login", form, {
-        withCredentials: true,
-      });
+
+      await axios.post(
+        "https://rentopedia-backend.onrender.com/api/auth/login",
+        form,
+        {
+          withCredentials: true,
+        },
+      );
 
       // Fetch user details
-      const res = await axios.get("https://rentopedia-backend.onrender.com/api/user/me", {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        "https://rentopedia-backend.onrender.com/api/user/me",
+        {
+          withCredentials: true,
+        },
+      );
       setUser(res.data);
       NProgress.done();
       setLoad(false);
@@ -65,9 +72,9 @@ const Login = () => {
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md font-semibold transition"
-            disabled={load?true:false}
+            disabled={load}
           >
-            Login
+            {load ? "Logging in..." : "Login"}
           </button>
           <p className="text-center text-sm text-gray-500">
             Don’t have an account?{" "}
