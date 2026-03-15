@@ -34,7 +34,7 @@ const Login = () => {
         },
       );
       setUser(res.data);
-      await new Promise((r) => setTimeout(r, 500));
+      await new Promise((r) => setTimeout(r, 2000));
       navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
