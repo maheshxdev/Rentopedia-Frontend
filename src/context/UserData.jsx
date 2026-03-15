@@ -15,7 +15,7 @@ const UserData = ({ children }) => {
     const checkUser = async () => {
       try {
         const res = await axios.get("https://rentopedia-backend.onrender.com/api/user/me", {
-        withCredentials: true,
+        withCredentials: true
       }); 
         setUser(res.data);
       } catch (err) {
