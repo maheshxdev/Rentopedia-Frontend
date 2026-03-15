@@ -17,7 +17,6 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoad(true);
-      await new Promise((r) => setTimeout(r, 50));
       await axios.post(
         "https://rentopedia-backend.onrender.com/api/auth/login",
         form,
@@ -34,8 +33,7 @@ const Login = () => {
         },
       );
       setUser(res.data);
-      await new Promise((r) => setTimeout(r, 2000));
-      navigate("/");
+      window.location.href = "/";
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
     }finally{
