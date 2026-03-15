@@ -8,6 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { setUser } = useUser();
   const [form, setForm] = useState({ username: "", password: "" });
+  const [load,setLoad]=false;
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -15,6 +16,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoad(true);
       // Login request
       NProgress.start();
       
@@ -28,7 +30,7 @@ const Login = () => {
       });
       setUser(res.data);
       NProgress.done();
-      
+      setLoad(false);
       navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
@@ -63,6 +65,7 @@ const Login = () => {
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md font-semibold transition"
+            disabled={load?true:false}
           >
             Login
           </button>
