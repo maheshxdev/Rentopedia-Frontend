@@ -5,5 +5,5 @@ const ProtectedRoute = ({ children }) => {
     return <div>Loading...</div>;
   }
 
-  return user ? children : <Navigate to="/login" />;
+  return user ? children : <Navigate to="/" />;
 };
