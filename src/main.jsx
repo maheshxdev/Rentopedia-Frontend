@@ -5,6 +5,7 @@ import './index.css';
 import UserProvider from './context/UserData';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "nprogress/nprogress.css";
 ReactDOM.createRoot(document.getElementById('root')).render(
     <UserProvider>
     <App />

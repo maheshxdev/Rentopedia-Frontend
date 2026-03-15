@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../context/UserData";
+import NProgress from "nprogress";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Login = () => {
     e.preventDefault();
     try {
       // Login request
+      NProgress.start();
       
       await axios.post("https://rentopedia-backend.onrender.com/api/auth/login", form, {
         withCredentials: true,
@@ -25,6 +27,8 @@ const Login = () => {
         withCredentials: true,
       });
       setUser(res.data);
+      NProgress.done();
+      
       navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
