@@ -114,7 +114,7 @@ const Settings = () => {
       console.error("Logout failed:", err);
     }
     setUser("");
-    navigate("/login");
+    navigate("/");
   };
 
   
