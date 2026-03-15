@@ -17,9 +17,7 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoad(true);
-      // Login request
-      NProgress.start();
-
+      await new Promise((r) => setTimeout(r, 50));
       await axios.post(
         "https://rentopedia-backend.onrender.com/api/auth/login",
         form,
@@ -36,11 +34,11 @@ const Login = () => {
         },
       );
       setUser(res.data);
-      NProgress.done();
-      setLoad(false);
       navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
+    }finally{
+      setLoad(false);
     }
   };
 
