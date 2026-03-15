@@ -24,20 +24,10 @@ const Login = () => {
           withCredentials: true,
         },
       );
-
-      // Fetch user details
-      const res = await axios.get(
-        "https://rentopedia-backend.onrender.com/api/user/me",
-        {
-          withCredentials: true,
-        },
-      );
-      setUser(res.data);
-      window.location.href = "/";
+      setLoad(false);
+      navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
-    }finally{
-      setLoad(false);
     }
   };
 
