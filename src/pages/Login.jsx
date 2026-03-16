@@ -24,7 +24,13 @@ const Login = () => {
           withCredentials: true,
         },
       );
+
+      const res = await axios.get(
+        "https://rentopedia-backend.onrender.com/api/user/me",
+        { withCredentials: true },
+      );
       setLoad(false);
+      setUser(res.data);
       navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
