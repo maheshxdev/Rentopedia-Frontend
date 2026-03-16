@@ -17,7 +17,7 @@ const Navbar = () => {
       console.error("Logout failed:", err);
     }
     setUser("");
-    navigate("/");
+    navigate("/login");
   };
 
   return (

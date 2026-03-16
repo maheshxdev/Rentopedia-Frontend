@@ -8,11 +8,6 @@ import { toast } from "react-toastify";
 const Settings = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUser();
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
-  const [notificationsEnabled, setNotificationsEnabled] = useState(() => {
-    const saved = localStorage.getItem("notificationsEnabled");
-    return saved ? saved === "true" : true;
-  });
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const [oldPassword, setOldPassword] = useState("");
@@ -50,7 +45,7 @@ const Settings = () => {
       );
 
       toast.success(res.data.message);
-      setUser(res.data.user); // update context with new user data
+      setUser(res.data.user);
     } catch (err) {
       console.error(err);
       toast.error("Failed to upload profile photo");
@@ -74,19 +69,6 @@ const Settings = () => {
     }
   };
 
-  const toggleTheme = () =>
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-
-  const toggleNotifications = () => setNotificationsEnabled((prev) => !prev);
-
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  }, [theme]);
-
-  useEffect(() => {
-    localStorage.setItem("notificationsEnabled", String(notificationsEnabled));
-  }, [notificationsEnabled]);
 
   const handleDeleteAccount = async () => {
     try {
@@ -114,7 +96,7 @@ const Settings = () => {
       console.error("Logout failed:", err);
     }
     setUser("");
-    navigate("/");
+    navigate("/login");
   };
 
   
@@ -169,38 +151,6 @@ const Settings = () => {
             Upload Photo
           </button>
         </div>
-
-        {/* 🌗 Theme Toggle */}
-        <div className="p-6 rounded-xl border bg-gray-50 shadow">
-          <h2 className="text-xl font-semibold mb-4 text-purple-600">
-            🌗 Theme
-          </h2>
-          <button
-            onClick={toggleTheme}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition w-full"
-          >
-            Switch to {theme === "light" ? "Dark" : "Light"} Mode
-          </button>
-        </div>
-
-        {/* 🔔 Notifications */}
-        <div className="p-6 rounded-xl border bg-gray-50 shadow">
-          <h2 className="text-xl font-semibold mb-4 text-purple-600">
-            🔔 Notifications
-          </h2>
-          <label className="flex items-center gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={notificationsEnabled}
-              onChange={toggleNotifications}
-              className="w-5 h-5 text-purple-600 accent-purple-600"
-            />
-            <span className="text-gray-700">
-              {notificationsEnabled ? "Enabled" : "Disabled"}
-            </span>
-          </label>
-        </div>
-
         {/* 🔒 Change Password */}
         <div className="p-[10px] rounded-xl border bg-gray-50 shadow md:col-span-2">
           <h2 className="text-xl font-semibold mb-4 text-purple-600">
