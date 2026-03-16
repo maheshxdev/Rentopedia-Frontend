@@ -1,3 +1,5 @@
+import { useUser } from "../context/UserData";
+
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useUser();
 
