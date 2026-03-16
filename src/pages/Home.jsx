@@ -14,6 +14,7 @@ import {
 
 
 const Home = () => {
+  window.location.reload();
   const { user } = useUser();
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");

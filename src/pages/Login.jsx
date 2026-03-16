@@ -25,7 +25,6 @@ const Login = () => {
         },
       );
       setLoad(false);
-      window.location.reload();
       navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
