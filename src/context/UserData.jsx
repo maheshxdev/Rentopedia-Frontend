@@ -17,7 +17,7 @@ const UserData = ({ children }) => {
         );
         setUser(res.data);
       } catch (err) {
-        setUser(undefined);
+        setUser(null);
       } finally {
         setLoading(false);
       }
