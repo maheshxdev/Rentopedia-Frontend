@@ -8,7 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { setUser } = useUser();
   const [form, setForm] = useState({ username: "", password: "" });
-  const [load, setLoad] = false;
+  const [load, setLoad] = useState(false);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
